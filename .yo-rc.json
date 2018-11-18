@@ -1,0 +1,33 @@
+{
+  "generator-jhipster": {
+    "promptValues": {
+      "packageName": "it.unimib.disco.bigtwine"
+    },
+    "jhipsterVersion": "5.7.0",
+    "applicationType": "microservice",
+    "baseName": "auth",
+    "packageName": "it.unimib.disco.bigtwine",
+    "packageFolder": "it/unimib/disco/bigtwine",
+    "serverPort": "9004",
+    "authenticationType": "jwt",
+    "cacheProvider": "no",
+    "enableHibernateCache": false,
+    "websocket": false,
+    "databaseType": "mongodb",
+    "devDatabaseType": "mongodb",
+    "prodDatabaseType": "mongodb",
+    "searchEngine": false,
+    "messageBroker": false,
+    "serviceDiscoveryType": "eureka",
+    "buildTool": "gradle",
+    "enableSwaggerCodegen": true,
+    "jwtSecretKey": "NTU2Y2QxYWJiN2FkYWVlODBhMGI4ZjkzNWY1Nzg2Y2FjODNhZGRhY2E4NzQ2NGIxMDQ1NDFkOWI3YTAwNzg3ZDAxMzEzZTRlMmQ1YTcxN2MwNzUzMzY0YTM5NmZhYzgyYzcwZmUzNjBiMWI1OGZkMjY1Y2ExMTI0OWI2ZjAyZDM=",
+    "testFrameworks": [],
+    "jhiPrefix": "jhi",
+    "otherModules": [],
+    "enableTranslation": false,
+    "clientPackageManager": "npm",
+    "skipClient": true,
+    "skipUserManagement": true
+  }
+}
