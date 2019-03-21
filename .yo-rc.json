@@ -1,14 +1,15 @@
 {
   "generator-jhipster": {
     "promptValues": {
-      "packageName": "it.unimib.disco.bigtwine"
+      "packageName": "it.unimib.disco.bigtwine.services.socials",
+      "nativeLanguage": "en"
     },
-    "jhipsterVersion": "5.7.0",
+    "jhipsterVersion": "5.7.2",
     "applicationType": "microservice",
-    "baseName": "auth",
-    "packageName": "it.unimib.disco.bigtwine",
-    "packageFolder": "it/unimib/disco/bigtwine",
-    "serverPort": "9004",
+    "baseName": "socials",
+    "packageName": "it.unimib.disco.bigtwine.services.socials",
+    "packageFolder": "it/unimib/disco/bigtwine/services/socials",
+    "serverPort": "9009",
     "authenticationType": "jwt",
     "cacheProvider": "no",
     "enableHibernateCache": false,
@@ -21,12 +22,17 @@
     "serviceDiscoveryType": "eureka",
     "buildTool": "gradle",
     "enableSwaggerCodegen": true,
-    "jwtSecretKey": "NTU2Y2QxYWJiN2FkYWVlODBhMGI4ZjkzNWY1Nzg2Y2FjODNhZGRhY2E4NzQ2NGIxMDQ1NDFkOWI3YTAwNzg3ZDAxMzEzZTRlMmQ1YTcxN2MwNzUzMzY0YTM5NmZhYzgyYzcwZmUzNjBiMWI1OGZkMjY1Y2ExMTI0OWI2ZjAyZDM=",
+    "jwtSecretKey": "NTY3MWEyZjkwMDNjMzdmZWQ1ZmU4YzUyYmM5MzFiNWI1YjA5YTAyZjAwOGFjNzM0ZWY0ZGYzZDU5YmZiOTk2ZWEzNjdjNDk0YmM3OWRiYzkxYzRmMDBjYWZkNGIyZDllNzQ1NmI1OTI5M2I4MTczYWFmZTE4M2JlNmMzNmFjZGY=",
     "testFrameworks": [],
     "jhiPrefix": "jhi",
     "otherModules": [],
-    "enableTranslation": false,
+    "enableTranslation": true,
     "clientPackageManager": "npm",
+    "nativeLanguage": "en",
+    "languages": [
+      "en",
+      "it"
+    ],
     "skipClient": true,
     "skipUserManagement": true
   }

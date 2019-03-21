@@ -47,21 +47,22 @@ dependencyManagement {
 
 defaultTasks 'bootRun'
 
-group = 'it.unimib.disco.bigtwine'
+group = 'it.unimib.disco.bigtwine.services.socials'
 version = '0.0.1-SNAPSHOT'
 
 description = ''
 
 bootWar {
-   mainClassName = 'it.unimib.disco.bigtwine.AuthApp'
+   mainClassName = 'it.unimib.disco.bigtwine.services.socials.SocialsApp'
 }
 
 war {
-
+    enabled = true
+    classifier = 'original'
 }
 
 springBoot {
-    mainClassName = 'it.unimib.disco.bigtwine.AuthApp'
+    mainClassName = 'it.unimib.disco.bigtwine.services.socials.SocialsApp'
     buildInfo()
 }
 
@@ -216,6 +217,7 @@ wrapper {
 task stage(dependsOn: 'bootWar') {
 }
 
+bootWar.dependsOn war
 compileJava.dependsOn processResources
 processResources.dependsOn cleanResources,bootBuildInfo
 bootBuildInfo.mustRunAfter cleanResources

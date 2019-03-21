@@ -17,17 +17,17 @@ eureka:
     client:
         enabled: false
     instance:
-        appname: auth
-        instanceId: auth:${spring.application.instance-id:${random.value}}
+        appname: socials
+        instanceId: socials:${spring.application.instance-id:${random.value}}
 
 spring:
     application:
-        name: auth
+        name: socials
     data:
         mongodb:
             host: localhost
             port: 0
-            database: auth
+            database: socials
     mail:
         host: localhost
     messages:
@@ -65,7 +65,7 @@ jhipster:
         authentication:
             jwt:
                 # This token must be encoded using Base64 (you can type `echo 'secret-key'|base64` on your command line)
-                base64-secret: NTU2Y2QxYWJiN2FkYWVlODBhMGI4ZjkzNWY1Nzg2Y2FjODNhZGRhY2E4NzQ2NGIxMDQ1NDFkOWI3YTAwNzg3ZDAxMzEzZTRlMmQ1YTcxN2MwNzUzMzY0YTM5NmZhYzgyYzcwZmUzNjBiMWI1OGZkMjY1Y2ExMTI0OWI2ZjAyZDM=
+                base64-secret: NTY3MWEyZjkwMDNjMzdmZWQ1ZmU4YzUyYmM5MzFiNWI1YjA5YTAyZjAwOGFjNzM0ZWY0ZGYzZDU5YmZiOTk2ZWEzNjdjNDk0YmM3OWRiYzkxYzRmMDBjYWZkNGIyZDllNzQ1NmI1OTI5M2I4MTczYWFmZTE4M2JlNmMzNmFjZGY=
                 # Token is valid 24 hours
                 token-validity-in-seconds: 86400
     metrics: # DropWizard Metrics configuration, used by MetricsConfiguration

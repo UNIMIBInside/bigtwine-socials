@@ -17,7 +17,7 @@ logging:
     level:
         ROOT: DEBUG
         io.github.jhipster: DEBUG
-        it.unimib.disco.bigtwine: DEBUG
+        it.unimib.disco.bigtwine.services.socials: DEBUG
 
 eureka:
     instance:
@@ -44,7 +44,7 @@ spring:
     data:
         mongodb:
             uri: mongodb://localhost:27017
-            database: auth
+            database: socials
     mail:
         host: localhost
         port: 25
@@ -65,7 +65,7 @@ spring:
                 enabled: true
 
 server:
-    port: 9004
+    port: 9009
 
 # ===================================================================
 # JHipster specific properties
@@ -88,14 +88,14 @@ jhipster:
     security:
         authentication:
             jwt:
-                # This token must be encoded using Base64 (you can type `echo 'secret-key'|base64` on your command line)
-                base64-secret: NTU2Y2QxYWJiN2FkYWVlODBhMGI4ZjkzNWY1Nzg2Y2FjODNhZGRhY2E4NzQ2NGIxMDQ1NDFkOWI3YTAwNzg3ZDAxMzEzZTRlMmQ1YTcxN2MwNzUzMzY0YTM5NmZhYzgyYzcwZmUzNjBiMWI1OGZkMjY1Y2ExMTI0OWI2ZjAyZDM=
+                # This token must be encoded using Base64 and be at least 256 bits long (you can type `openssl rand -base64 64` on your command line to generate a 512 bits one)
+                base64-secret: NTY3MWEyZjkwMDNjMzdmZWQ1ZmU4YzUyYmM5MzFiNWI1YjA5YTAyZjAwOGFjNzM0ZWY0ZGYzZDU5YmZiOTk2ZWEzNjdjNDk0YmM3OWRiYzkxYzRmMDBjYWZkNGIyZDllNzQ1NmI1OTI5M2I4MTczYWFmZTE4M2JlNmMzNmFjZGY=
                 # Token is valid 24 hours
                 token-validity-in-seconds: 86400
                 token-validity-in-seconds-for-remember-me: 2592000
     mail: # specific JHipster mail property, for standard properties see MailProperties
-        from: auth@localhost
-        base-url: http://127.0.0.1:9004
+        from: socials@localhost
+        base-url: http://127.0.0.1:9009
     metrics: # DropWizard Metrics configuration, used by MetricsConfiguration
         jmx:
             enabled: true
