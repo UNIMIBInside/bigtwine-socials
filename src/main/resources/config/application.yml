@@ -143,4 +143,11 @@ jhipster:
 # https://www.jhipster.tech/common-application-properties/
 # ===================================================================
 
-# application:
+application:
+    security:
+        encryptors:
+            password: aaaa
+            salt: bbbb
+        twitter:
+            consumer-key: 0NJb4MIbWfmM6WSWe0V4P1xpI
+            consumer-secret: rBg3TxXPjgvJFvhWlxd0QWTD3aaIh1aeAY2oWOzUT9fcoqhIeT
