@@ -1,16 +1,11 @@
 package it.unimib.disco.bigtwine.services.socials.config;
 
 import com.mongodb.MongoClient;
-import com.netflix.discovery.EurekaClient;
 import it.unimib.disco.bigtwine.services.socials.connect.AccountCreatorLocator;
 import it.unimib.disco.bigtwine.services.socials.connect.AccountCreatorRegistry;
-import it.unimib.disco.bigtwine.services.socials.discovery.EurekaServiceAddressResolver;
-import it.unimib.disco.bigtwine.services.socials.discovery.ServiceAddressResolver;
-import it.unimib.disco.bigtwine.services.socials.discovery.SpringServiceAddressResolver;
 import org.eluder.spring.social.mongodb.MongoConnectionTransformers;
 import org.eluder.spring.social.mongodb.MongoUsersConnectionRepository;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -58,8 +53,4 @@ public class SocialsConfiguration {
         return new AccountCreatorRegistry();
     }
 
-    @Bean
-    public ServiceAddressResolver getServiceAddressResolver(DiscoveryClient discoveryClient) {
-        return new SpringServiceAddressResolver(discoveryClient);
-    }
 }

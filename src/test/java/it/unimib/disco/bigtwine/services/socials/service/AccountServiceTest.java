@@ -39,10 +39,13 @@ public class AccountServiceTest {
     }
 
     @Test
+    @SuppressWarnings("unchecked")
     public void testRegisterAccount() {
+
         when(restOperations.exchange(anyString(), any(), any(), (Class<Object>) any()))
             .thenAnswer((a) -> {
                 AccountDTO reqAccount = ((HttpEntity<AccountDTO>)a.getArgument(2)).getBody();
+                assertNotNull(reqAccount);
                 Account account = this.createAccount()
                     .id("1")
                     .activated(true)
@@ -68,6 +71,7 @@ public class AccountServiceTest {
     }
 
     @Test
+    @SuppressWarnings("unchecked")
     public void testGetAccountById() {
         when(restOperations.exchange(anyString(), any(), any(), (Class<Object>) any()))
             .thenAnswer((a) -> {
