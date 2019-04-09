@@ -130,6 +130,10 @@ repositories {
     mavenLocal()
     mavenCentral()
     jcenter()
+    maven { url 'https://jitpack.io' }
+    flatDir {
+        dirs 'libs'
+    }
     //jhipster-needle-gradle-repositories - JHipster will add additional repositories
 }
 
@@ -179,6 +183,9 @@ dependencies {
     compile "org.springframework.security:spring-security-config"
     compile "org.springframework.security:spring-security-data"
     compile "org.springframework.security:spring-security-web"
+    compile 'org.springframework.social:spring-social-twitter:1.1.2.RELEASE'
+    // compile 'org.eluder.spring:spring-social-mongodb:1.0-SNAPSHOT'
+    compile 'org.bitbucket.bigtwine:spring-social-mongodb:master-SNAPSHOT'
     compile "io.jsonwebtoken:jjwt-api"
     runtime "io.jsonwebtoken:jjwt-impl"
     runtime "io.jsonwebtoken:jjwt-jackson"
