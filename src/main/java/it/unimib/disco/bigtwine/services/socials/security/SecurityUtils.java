@@ -1,9 +1,12 @@
 package it.unimib.disco.bigtwine.services.socials.security;
 
+import it.unimib.disco.bigtwine.services.socials.config.Constants;
+import org.apache.commons.lang.RandomStringUtils;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.Map;
 import java.util.Optional;
 
 /**
@@ -28,6 +31,29 @@ public final class SecurityUtils {
                     return springSecurityUser.getUsername();
                 } else if (authentication.getPrincipal() instanceof String) {
                     return (String) authentication.getPrincipal();
+                }
+                return null;
+            });
+    }
+
+    /**
+     * Get the id of the current user
+     *
+     * @return the id of the current user
+     */
+    public static Optional<String> getCurrentUserId() {
+        SecurityContext securityContext = SecurityContextHolder.getContext();
+        return Optional.ofNullable(securityContext.getAuthentication())
+            .map(authentication -> {
+                if (authentication.getDetails() instanceof Map) {
+                    @SuppressWarnings("unchecked")
+                    Map<Object, Object> details = (Map<Object, Object>) authentication.getDetails();
+                    Object userId = details.getOrDefault(AuthDetailsConstants.USER_ID, null);
+                    if (userId != null) {
+                        return userId.toString();
+                    }else {
+                        return null;
+                    }
                 }
                 return null;
             });
@@ -72,5 +98,28 @@ public final class SecurityUtils {
             .map(authentication -> authentication.getAuthorities().stream()
                 .anyMatch(grantedAuthority -> grantedAuthority.getAuthority().equals(authority)))
             .orElse(false);
+    }
+
+    /**
+     * Create and return a random string usable as password for an user account
+     *
+     * @return a random password
+     */
+    public static String getRandomPassword() {
+        return RandomStringUtils.random(16, true, true);
+    }
+
+    /**
+     * Clean an username by removing all invalid character
+     *
+     * @param username The username to clean
+     * @return The cleaned username
+     */
+    public static String cleanUsername(String username) {
+        if (username == null) {
+            return null;
+        }
+
+        return username.replaceAll(Constants.LOGIN_DISALLOWED_REGEX, "");
     }
 }

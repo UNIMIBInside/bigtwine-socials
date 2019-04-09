@@ -1,5 +1,6 @@
 package it.unimib.disco.bigtwine.services.socials.security.jwt;
 
+import it.unimib.disco.bigtwine.services.socials.config.Constants;
 import it.unimib.disco.bigtwine.services.socials.security.AuthoritiesConstants;
 
 import java.security.Key;
@@ -12,6 +13,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.test.util.ReflectionTestUtils;
 
 import io.github.jhipster.config.JHipsterProperties;
@@ -20,6 +22,7 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 
+import static org.hamcrest.CoreMatchers.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class TokenProviderTest {
@@ -83,6 +86,26 @@ public class TokenProviderTest {
         boolean isTokenValid = tokenProvider.validateToken("");
 
         assertThat(isTokenValid).isEqualTo(false);
+    }
+
+    @Test
+    public void testSystemToken() {
+        String systemToken = tokenProvider.createSystemToken();
+        boolean isTokenValid = tokenProvider.validateToken(systemToken);
+
+        assertThat(isTokenValid).isEqualTo(true);
+
+        Authentication authentication = tokenProvider.getAuthentication(systemToken);
+
+        assertThat(authentication).isNotNull();
+        assertThat(((User)authentication.getPrincipal()).getUsername()).isEqualTo(Constants.SYSTEM_ACCOUNT);
+
+        int i = 0;
+        for (GrantedAuthority role: authentication.getAuthorities()) {
+            if (role.getAuthority().equals(AuthoritiesConstants.ADMIN)) i++;
+        }
+
+        assertThat(i).isGreaterThan(0);
     }
 
     private Authentication createAuthentication() {
