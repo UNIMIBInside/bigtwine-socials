@@ -246,6 +246,10 @@ public class OauthApiDelegateImpl implements OauthApiDelegate {
 
         String jwt = this.jwtSocialSignInProvider.signIn(userId, connection, this.getRequestOrThrow());
 
+        if (jwt == null) {
+            throw new SignInException();
+        }
+
         SignInResponse response = new SignInResponse();
         response
             .idToken(jwt)
