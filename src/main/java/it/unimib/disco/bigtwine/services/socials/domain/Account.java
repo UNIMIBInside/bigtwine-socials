@@ -5,6 +5,7 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -132,14 +133,10 @@ public class Account {
         this.authorities = authorities;
     }
 
-    public void setAuthorities(String... authorities) {
-        Set<String> a = new HashSet<>(Arrays.asList(authorities));
-        this.setAuthorities(a);
-    }
-
-
     public Account authorities(String... authorities) {
-        this.setAuthorities(authorities);
+        Set<String> authoritiesSet = new HashSet<>();
+        Collections.addAll(authoritiesSet, authorities);
+        this.setAuthorities(authoritiesSet);
 
         return this;
     }

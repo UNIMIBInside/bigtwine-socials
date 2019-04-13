@@ -1,6 +1,6 @@
 package it.unimib.disco.bigtwine.services.socials.service;
 
-import it.unimib.disco.bigtwine.services.socials.config.Constants;
+import it.unimib.disco.bigtwine.services.socials.client.AuthServiceClient;
 import it.unimib.disco.bigtwine.services.socials.connect.dto.AccountDTO;
 import it.unimib.disco.bigtwine.services.socials.domain.Account;
 import it.unimib.disco.bigtwine.services.socials.security.AuthoritiesConstants;
@@ -8,10 +8,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.client.RestOperations;
 
 import java.util.Optional;
 
@@ -21,10 +17,7 @@ import static org.mockito.Mockito.*;
 public class AccountServiceTest {
 
     @Mock
-    private InterServiceCommunication interServiceCommunication;
-
-    @Mock
-    private RestOperations restOperations;
+    private AuthServiceClient authServiceClient;
 
     private AccountService accountService;
 
@@ -32,19 +25,11 @@ public class AccountServiceTest {
     public void initMocks() {
         MockitoAnnotations.initMocks(this);
 
-        when(interServiceCommunication.getRestOperations(anyString()))
-            .thenReturn(restOperations);
+        this.accountService = new AccountService(this.authServiceClient);
 
-        this.accountService = new AccountService(this.interServiceCommunication);
-    }
-
-    @Test
-    @SuppressWarnings("unchecked")
-    public void testRegisterAccount() {
-
-        when(restOperations.exchange(anyString(), any(), any(), (Class<Object>) any()))
+        when(authServiceClient.createAccount(any()))
             .thenAnswer((a) -> {
-                AccountDTO reqAccount = ((HttpEntity<AccountDTO>)a.getArgument(2)).getBody();
+                AccountDTO reqAccount = a.getArgument(0);
                 assertNotNull(reqAccount);
                 Account account = this.createAccount()
                     .id("1")
@@ -56,9 +41,25 @@ public class AccountServiceTest {
                     .imageUrl(reqAccount.getImageUrl());
                 account.setAuthorities(reqAccount.getAuthorities());
 
-                return new ResponseEntity<>(account, HttpStatus.CREATED);
+                return account;
             });
 
+        when(authServiceClient.findAccountById(anyString()))
+            .thenAnswer((a) -> {
+                return this.createAccount()
+                    .id(a.getArgument(0))
+                    .activated(true)
+                    .login("login")
+                    .email("user@email.com")
+                    .firstName("firstname")
+                    .lastName("lastname")
+                    .imageUrl("http://fakehost/image.png")
+                    .authorities(AuthoritiesConstants.USER);
+            });
+    }
+
+    @Test
+    public void testRegisterAccount() {
         Account account = this.createAccount()
             .login("User Name")
             .email("email@email.com");
@@ -67,34 +68,17 @@ public class AccountServiceTest {
         assertTrue(registeredAccount.isPresent());
         assertEquals("UserName", registeredAccount.get().getLogin());
 
-        verify(interServiceCommunication, times(1)).getRestOperations(Constants.GATEWAY_SERVICE_ID);
+        verify(authServiceClient, times(1)).createAccount(any());
     }
 
     @Test
-    @SuppressWarnings("unchecked")
     public void testGetAccountById() {
-        when(restOperations.exchange(anyString(), any(), any(), (Class<Object>) any()))
-            .thenAnswer((a) -> {
-                Account account = this.createAccount()
-                    .id("1")
-                    .activated(true)
-                    .login("login")
-                    .email("user@email.com")
-                    .firstName("firstname")
-                    .lastName("lastname")
-                    .imageUrl("http://fakehost/image.png")
-                    .authorities(AuthoritiesConstants.USER);
-
-                return new ResponseEntity<>(account, HttpStatus.OK);
-            });
-
         Optional<Account> account = this.accountService.getAccountById("1");
 
         assertTrue(account.isPresent());
         assertEquals("login", account.get().getLogin());
 
-        verify(interServiceCommunication, times(1)).getRestOperations(Constants.GATEWAY_SERVICE_ID);
-        verify(restOperations, times(1)).exchange(eq("/api/users/id/1"), any(), any(), (Class<Object>) any());
+        verify(authServiceClient, times(1)).findAccountById(anyString());
     }
 
     private Account createAccount() {

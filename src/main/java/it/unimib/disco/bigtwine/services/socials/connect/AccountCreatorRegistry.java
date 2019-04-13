@@ -24,11 +24,18 @@ public final class AccountCreatorRegistry implements AccountCreatorLocator {
     @Override
     @SuppressWarnings("unchecked")
     public <A> AccountCreator<A> getAccountCreator(Class<A> apiClass) {
-        if (this.creatorsIndex.containsKey(apiClass)) {
-            return (AccountCreator<A>)this.creatorsIndex.get(apiClass);
-        }
+        Class<?> klass = this.creatorsIndex
+            .keySet()
+            .stream()
+            .filter((k) -> k.isAssignableFrom(apiClass))
+            .findFirst()
+            .orElse(null);
 
-        return new DefaultAccountCreator<>();
+        if (klass != null) {
+            return (AccountCreator<A>) this.creatorsIndex.get(klass);
+        }else {
+            return new DefaultAccountCreator<>();
+        }
     }
 
     @Override
