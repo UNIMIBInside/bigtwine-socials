@@ -146,7 +146,7 @@ jhipster:
 application:
     security:
         encryptors:
-            password: aaaa
+            secret: aaaa
             salt: bbbb
         twitter:
             consumer-key: 0NJb4MIbWfmM6WSWe0V4P1xpI

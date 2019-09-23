@@ -29,15 +29,15 @@ public class ApplicationProperties {
         }
 
         public static class Encryptors {
-            private String password;
+            private String secret;
             private String salt;
 
-            public String getPassword() {
-                return password;
+            public String getSecret() {
+                return secret;
             }
 
-            public void setPassword(String password) {
-                this.password = password;
+            public void setSecret(String secret) {
+                this.secret = secret;
             }
 
             public String getSalt() {

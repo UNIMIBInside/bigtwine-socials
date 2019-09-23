@@ -15,4 +15,8 @@ public interface AuthServiceClient {
 
     @RequestMapping(method = RequestMethod.GET, path = "/api/users/id/{id}", consumes = "application/json")
     Account findAccountById(@PathVariable(name = "id") String id);
+
+
+    @RequestMapping(method = RequestMethod.GET, path = "/api/users/{login}", consumes = "application/json")
+    Account findAccountByLogin(@PathVariable(name = "login") String login);
 }
