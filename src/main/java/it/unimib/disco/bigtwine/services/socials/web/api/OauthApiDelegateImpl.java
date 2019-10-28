@@ -165,7 +165,7 @@ public class OauthApiDelegateImpl implements OauthApiDelegate {
         }catch (HttpClientErrorException e) {
             throw new InvalidOAuthCallbackUrlException();
         }catch (RestClientException e) {
-            throw new InternalServerErrorException("An error occured while contacting the service provider. Try again later.");
+            throw new InternalServerErrorException("An error occurred while contacting the service provider. Try again later.");
         }
 
         this.requestTokenRepository.save(new RequestToken().createdAt(Instant.now()).token(requestToken));
@@ -275,5 +275,21 @@ public class OauthApiDelegateImpl implements OauthApiDelegate {
         Connection<?> connection = connectionOpt.get();
 
         return ResponseEntity.ok(this.getOAuthCredentials(provider, connection));
+    }
+
+    @Override
+    public ResponseEntity<Void> deleteV1(String provider) {
+        String userId = SecurityUtils
+            .getCurrentUserId()
+            .orElseThrow(UnauthorizedException::new);
+
+        Connection<?> connection = this.getValidConnection(provider, userId)
+            .orElseThrow(ConnectionNotFoundException::new);
+
+        this.usersConnectionRepository
+            .createConnectionRepository(userId)
+            .removeConnection(connection.getKey());
+
+        return ResponseEntity.ok().build();
     }
 }
