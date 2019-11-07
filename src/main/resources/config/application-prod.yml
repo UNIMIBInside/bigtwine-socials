@@ -129,8 +129,5 @@ jhipster:
 # https://www.jhipster.tech/common-application-properties/
 # ===================================================================
 
-application:
-    security:
-        encryptors:
-            secret: aaaa
-            salt: bbbb
+# application:
+#

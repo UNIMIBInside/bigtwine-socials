@@ -146,8 +146,8 @@ jhipster:
 application:
     security:
         encryptors:
-            secret: aaaa
-            salt: bbbb
+            secret: deccbe497a1cf41ad38b6e547625185e
+            salt: d2758e83564f3c81bacb3c1f3ec75b16
         twitter:
-            consumer-key: 0NJb4MIbWfmM6WSWe0V4P1xpI
-            consumer-secret: rBg3TxXPjgvJFvhWlxd0QWTD3aaIh1aeAY2oWOzUT9fcoqhIeT
+            consumer-key: MDgL32UX0ex2GLlLicrmYo4s4
+            consumer-secret: 1tBNt5DVYDcfGRAWBUNjz8CbC1hycn4Q1wGT4Zo7QJv83cdqpO
