@@ -143,11 +143,16 @@ jhipster:
 # https://www.jhipster.tech/common-application-properties/
 # ===================================================================
 
-application:
-    security:
-        encryptors:
-            secret: deccbe497a1cf41ad38b6e547625185e
-            salt: d2758e83564f3c81bacb3c1f3ec75b16
-        twitter:
-            consumer-key: MDgL32UX0ex2GLlLicrmYo4s4
-            consumer-secret: 1tBNt5DVYDcfGRAWBUNjz8CbC1hycn4Q1wGT4Zo7QJv83cdqpO
+# application:
+#    security:
+#        encryptors:
+#            secret: ***SET WITH ENV VAR***
+#            salt: ***SET WITH ENV VAR***
+#        twitter:
+#            consumer-key: ***SET WITH ENV VAR***
+#            consumer-secret: ***SET WITH ENV VAR***
+#            demo-user:
+#                id: ***SET WITH ENV VAR***
+#                name: ***SET WITH ENV VAR***
+#                access-token: ***SET WITH ENV VAR***
+#                access-secret: ***SET WITH ENV VAR***
